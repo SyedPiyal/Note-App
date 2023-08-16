@@ -7,6 +7,7 @@ import com.piyal.mvvmnoteapp.models.NoteRequest
 import com.piyal.mvvmnoteapp.models.NoteResponse
 import com.piyal.mvvmnoteapp.utils.NetworkResult
 import org.json.JSONObject
+import retrofit2.Response
 import javax.inject.Inject
 
 class NoteRepository @Inject constructor(private val notesAPI: NotesAPI){
@@ -36,11 +37,28 @@ class NoteRepository @Inject constructor(private val notesAPI: NotesAPI){
 
     suspend fun createNote(noteRequest: NoteRequest){
 
+        _statusLiveData.postValue(NetworkResult.Loading())
+        val response = notesAPI.createNote(noteRequest)
+        handleResponse(response,"Note Created")
     }
-    suspend fun deleteNote(noteId:String){
 
+
+    suspend fun deleteNote(noteId:String){
+        _statusLiveData.postValue(NetworkResult.Loading())
+        val response = notesAPI.deleteNote(noteId)
+        handleResponse(response,"Note Deleted")
     }
     suspend fun updateNote(noteId:String, noteRequest: NoteRequest){
+        _statusLiveData.postValue(NetworkResult.Loading())
+        val response = notesAPI.updateNote(noteId,noteRequest)
+        handleResponse(response,"Note Updated")
+    }
+    private fun handleResponse(response: Response<NoteResponse>, message: String) {
+        if (response.isSuccessful && response.body() != null) {
+            _statusLiveData.postValue(NetworkResult.Success(message))
+        } else {
 
+            _statusLiveData.postValue(NetworkResult.Error("Something went wrong"))
+        }
     }
 }
