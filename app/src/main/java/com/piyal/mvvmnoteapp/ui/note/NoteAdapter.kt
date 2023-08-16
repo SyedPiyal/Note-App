@@ -1,4 +1,4 @@
-package com.piyal.mvvmnoteapp
+package com.piyal.mvvmnoteapp.ui.note
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

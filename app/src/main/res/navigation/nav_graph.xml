@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.piyal.mvvmnoteapp.LoginFragment"
+        android:name="com.piyal.mvvmnoteapp.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.piyal.mvvmnoteapp.RegisterFragment"
+        android:name="com.piyal.mvvmnoteapp.ui.login.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -32,17 +32,17 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.piyal.mvvmnoteapp.ProfileFragment"
+        android:name="com.piyal.mvvmnoteapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/noteFragment"
-        android:name="com.piyal.mvvmnoteapp.NoteFragment"
+        android:name="com.piyal.mvvmnoteapp.ui.note.NoteFragment"
         android:label="fragment_note"
         tools:layout="@layout/fragment_note" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.piyal.mvvmnoteapp.MainFragment"
+        android:name="com.piyal.mvvmnoteapp.ui.note.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action

@@ -1,4 +1,4 @@
-package com.piyal.mvvmnoteapp
+package com.piyal.mvvmnoteapp.ui.note
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,12 +14,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.piyal.mvvmnoteapp.R
 import com.piyal.mvvmnoteapp.models.NoteRequest
 import com.piyal.mvvmnoteapp.utils.NetworkResult
 
 @AndroidEntryPoint
 class NoteFragment : Fragment() {
-
 
     private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
@@ -41,21 +41,6 @@ class NoteFragment : Fragment() {
         bindObservers()
     }
 
-
-
-    private fun setInitialData() {
-        val jsonNote = arguments?.getString("note")
-        if (jsonNote != null){
-            note = Gson().fromJson(jsonNote,NoteResponse::class.java)
-            note?.let {
-                binding.txtTitle.setText(it.title)
-                binding.txtDescription.setText(it.description)
-            }
-        }
-        else{
-            binding.addEditText.text = "Add Note"
-        }
-    }
     private fun bindObservers() {
         noteViewModel.statusLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -90,11 +75,24 @@ class NoteFragment : Fragment() {
         }
     }
 
+    private fun setInitialData() {
+        val jsonNote = arguments?.getString("note")
+        if (jsonNote != null) {
+            note = Gson().fromJson<NoteResponse>(jsonNote, NoteResponse::class.java)
+            note?.let {
+                binding.txtTitle.setText(it.title)
+                binding.txtDescription.setText(it.description)
+            }
+        }
+        else{
+            binding.addEditText.text = resources.getString(R.string.add_note)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

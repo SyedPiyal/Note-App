@@ -18,28 +18,26 @@ class UserRepository @Inject constructor(private val userAPI: UserAPI) {
 
     suspend fun registerUser(userRequest: UserRequest) {
         _userResponseLiveData.postValue(NetworkResult.Loading())
-
         val response = userAPI.signup(userRequest)
         handleResponse(response)
     }
 
     suspend fun loginUser(userRequest: UserRequest) {
         _userResponseLiveData.postValue(NetworkResult.Loading())
-
-        val response = userAPI.signin(userRequest)
+        val response =userAPI.signin(userRequest)
         handleResponse(response)
     }
 
     private fun handleResponse(response: Response<UserResponse>) {
         if (response.isSuccessful && response.body() != null) {
             _userResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
-        } else if (response.errorBody() != null) {
+        }
+        else if(response.errorBody()!=null){
             val errorObj = JSONObject(response.errorBody()!!.charStream().readText())
-            _userResponseLiveData.postValue(NetworkResult.Error(errorObj.getString("Something Went Wrong")))
-        } else {
+            _userResponseLiveData.postValue(NetworkResult.Error(errorObj.getString("message")))
+        }
+        else{
             _userResponseLiveData.postValue(NetworkResult.Error("Something Went Wrong"))
         }
     }
-
-
 }
