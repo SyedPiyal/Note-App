@@ -1,10 +1,10 @@
 # Note-App
 
-Welcome to the Notes App project! This is a comprehensive Android application designed for taking and managing notes, with integrated API support. The project incorporates essential modern Android development practices and technologies to create a robust and functional application.
+Welcome to the Note App project! This is a comprehensive Android application designed for taking and managing notes, with integrated API support. The project incorporates essential modern Android development practices and technologies to create a robust and functional application.
 
 ## Features
 
-The Notes App comes with a range of features that make note-taking and management a breeze:
+The Note App comes with a range of features that make note-taking and management a breeze:
 
 - **MVVM Setup:** The project follows the Model-View-ViewModel (MVVM) architecture, ensuring a clear separation of concerns and making the codebase more maintainable.
 
